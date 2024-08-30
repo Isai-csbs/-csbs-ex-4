@@ -1,0 +1,31 @@
+import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the Iris dataset
+iris = px.data.iris()
+
+# Select an attribute for analysis (e.g., 'petal_width')
+attribute = 'petal_width'
+
+# Construct the Box plot for the selected attribute
+plt.figure(figsize=(10, 6))
+sns.boxplot(y=iris[attribute], width=0.2)  # Reduced width of the boxplot**
+plt.title(f'Box Plot of {attribute}')
+plt.ylabel(attribute)  # Set y-axis label to the attribute name
+plt.xlabel('')  # Remove x-axis label as it's not needed for a vertical boxplot
+plt.show()
+
+# Compare the statistical description with the Box plot
+# Print the statistical description of the selected attribute
+attr_desc = iris[attribute].describe()
+print(f"\nStatistical description of '{attribute}':")
+print(attr_desc)
+
+# Draw the dependency curve (KDE) for the selected attribute
+plt.figure(figsize=(10, 6))
+sns.kdeplot(iris[attribute], fill=True)
+plt.title(f'Dependency Curve (KDE) of {attribute}')
+plt.xlabel(attribute)
+plt.ylabel('Density')
+plt.show()
